@@ -6,7 +6,7 @@ class AuthController {
   showRegisterForm({ view }) {
     return view.render("register");
   }
-  showLoginForm() {
+  showLoginForm({ view }) {
     return view.render("login");
   }
   async register ({ request, response }) {

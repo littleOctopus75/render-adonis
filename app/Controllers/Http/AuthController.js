@@ -19,6 +19,21 @@ class AuthController {
     const token = await auth.attempt(email, password)
     return response.json(token)
   }
+  async logout ({ auth, response }) {
+    await auth.logout()
+    return response.redirect('/')
+  }
 }
+class HomeController {
+  async index ({ auth, view }) {
+    const user = await auth.getUser()
+
+    return view.render('welcome', {
+      user: user || null
+    })
+  }
+}
+
+module.exports = HomeController
 
 module.exports = AuthController;

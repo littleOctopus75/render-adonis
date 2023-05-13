@@ -6,10 +6,14 @@
   </head>
   <body>
     <h1>Hola</h1>
-  @if (user)
-    <h1>Hola, {{ user.username }} ✋</h1>
+  @loggedIn
+    <h1>Hola, {{ user.user.username }} ✋</h1>
+    <form action="/drop" method="post">
+      {{ csrfField() }}
+      <button type="submit">borrar cuenta</button>
+    </form>
   @else
     <p>No haz iniciado sesión 💔</p>
-  @endif
+  @endloggedIn
   </body>
 </html>

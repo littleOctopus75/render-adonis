@@ -23,6 +23,12 @@ class AuthController {
     await auth.logout()
     return response.redirect('/')
   }
+  async drop ({ auth, response }) {
+    const user = await User.find(auth.user.id)
+    await user.delete()
+    await auth.logout()
+    return response.redirect('/')
+  }
 }
 
 module.exports = AuthController;

@@ -7,7 +7,7 @@
   <body>
     <h1>Hola</h1>
   @loggedIn
-    <h1>Hola, {{ user.user.username }} ✋</h1>
+    <h1>Hola, {{ auth.user.username }} ✋</h1>
     <form action="/drop" method="post">
       {{ csrfField() }}
       <button type="submit">borrar cuenta</button>

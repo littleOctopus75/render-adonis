@@ -1,21 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Registro</title>
+    <style>
+      err {
+        color: darkred;
+        display: inline;
+      }
+    </style>
   </head>
   <body>
     <h1>Registro de nuevo usuario</h1>
     <form action="/register" method="post">
       {{ csrfField() }}
-      <label for="username">Nombre de usuario:</label><br>
-      <input type="text" id="username" name="username"><br>
-      <label for="email">Correo electrónico:</label><br>
-      <input type="email" id="email" name="email"><br>
-      <label for="password">Contraseña:</label><br>
+      <label for="username">Nombre de usuario:</label><br />
+      <input type="text" name="username" value="{{ old('username', '') }}"><br>
+      @if(hasErrorFor('username'))
+      <err>{{ getErrorFor('username') }}</err><br>
+      @endif
+      <label for="email">Correo electrónico:</label><br />
+      <input type="email" name="email" value="{{ old('email', '') }}"><br>
+      @if(hasErrorFor('email'))
+      <err>{{ getErrorFor('email') }}</err><br>
+      @endif
+      <label for="password">Contraseña:</label><br />
       <input type="password" id="password" name="password"><br>
-      <br>
-      <input type="submit" value="Registrarse">
+    @if(hasErrorFor('password'))
+    <err>{{ getErrorFor('password') }}</err><br>
+    @endif
+      <br />
+      <input type="submit" value="Registrarse" />
     </form>
   </body>
 </html>

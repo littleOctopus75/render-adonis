@@ -15,20 +15,30 @@
     <form action="/register" method="post">
       {{ csrfField() }}
       <label for="username">Nombre de usuario:</label><br />
-      <input type="text" name="username" value="{{ old('username', '') }}"><br>
+      <input
+        type="text"
+        name="username"
+        value="{{ old('username', '') }}"
+      /><br />
       @if(hasErrorFor('username'))
-      <err>{{ getErrorFor('username') }}</err><br>
+      <err>{{ getErrorFor("username") }}</err
+      ><br />
       @endif
       <label for="email">Correo electrónico:</label><br />
-      <input type="email" name="email" value="{{ old('email', '') }}"><br>
+      <input type="email" name="email" value="{{ old('email', '') }}" /><br />
       @if(hasErrorFor('email'))
-      <err>{{ getErrorFor('email') }}</err><br>
+      <err>{{ getErrorFor("email") }}</err
+      ><br />
       @endif
       <label for="password">Contraseña:</label><br />
-      <input type="password" id="password" name="password"><br>
-    @if(hasErrorFor('password'))
-    <err>{{ getErrorFor('password') }}</err><br>
-    @endif
+      <input type="password" id="password" name="password" /><br />
+      @if(hasErrorFor('password'))
+      <err>{{ getErrorFor("password") }}</err
+      ><br />
+      @endif
+      <label for="password_confirmation">Contraseña:</label><br />
+      <input type="password" name="password_confirmation" /><br />
+     
       <br />
       <input type="submit" value="Registrarse" />
     </form>

@@ -11,15 +11,12 @@ class AuthController {
     return view.render("login");
   }
   async register({ request, session, response }) {
-    const userData = request.only(["username", "email", "password"]);
-    const user = await User.create(userData);
-    return response.json(user);
-  }
-  async login({ request, response, auth }) {
+
     const rules = {
       username: "required|unique:users,username",
+      //unique:base de datos usuario y campo email
       email: "required|email|unique:users,email",
-      password: "required",
+      password: "confirmed",
     };
     const messages = {
       "username.required": "El campo nombre de usuario es obligatorio. 🎃",
@@ -28,14 +25,20 @@ class AuthController {
       "email.unique": "El correo electrónico ya está ocupado. 🎭",
       "email.email":
         "El campo correo electrónico debe ser una dirección de correo válida. 🎍",
-      "password.required": "El campo contraseña es obligatorio. 😨",
+      "password.confirmed": "El campo contraseña no coincide. 😨",
     };
     const validation = await validate(request.all(), rules, messages);
     if (validation.fails()) {
       // Lógica en caso de validación fallida
-      session.withErrors(validation.messages()).flashExcept(["password"]);
+      session.withErrors(validation.messages()).flashExcept(["password","password_confirmed"]);
       return response.redirect("back");
     }
+    const userData = request.only(["username", "email", "password"]);
+    const user = await User.create(userData);
+    return response.json(user);
+  }
+  async login({ request, response, auth }) {
+   
     const { email, password } = request.all();
     const token = await auth.attempt(email, password);
     return response.json(token);

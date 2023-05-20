@@ -16,7 +16,7 @@ class AuthController {
       username: "required|unique:users,username",
       //unique:base de datos usuario y campo email
       email: "required|email|unique:users,email",
-      password: "confirmed",
+      password: "required|confirmed",
     };
     const messages = {
       "username.required": "El campo nombre de usuario es obligatorio. 🎃",
